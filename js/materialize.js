@@ -4698,7 +4698,18 @@ if (Vel) {
                 beforeMatch = $el.text().slice(0, matchStart),
                 matchText = $el.text().slice(matchStart, matchEnd + 1),
                 afterMatch = $el.text().slice(matchEnd + 1);
-            $el.html("<span>" + beforeMatch + "<span class='highlight'>" + matchText + "</span>" + afterMatch + "</span>");
+
+            // Rebuild contents using text nodes instead of HTML to avoid
+            // reinterpreting DOM text as HTML.
+            $el.empty();
+            var $wrapper = $('<span></span>');
+            $wrapper.append(document.createTextNode(beforeMatch));
+            var $highlightSpan = $("<span class='highlight'></span>");
+            $highlightSpan.text(matchText);
+            $wrapper.append($highlightSpan);
+            $wrapper.append(document.createTextNode(afterMatch));
+            $el.append($wrapper);
+
             if (img.length) {
               $el.prepend(img);
             }
