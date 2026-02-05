@@ -4596,7 +4596,7 @@ if (Vel) {
       }
 
       // Set indicator value
-      thumb.find('.value').html($(this).val());
+      thumb.find('.value').text($(this).val());
 
       range_mousedown = true;
       $(this).addClass('active');
@@ -4628,7 +4628,7 @@ if (Vel) {
 
         var offsetLeft = calcRangeOffset(input);
         thumb.addClass('active').css('left', offsetLeft);
-        thumb.find('.value').html(thumb.siblings(range_type).val());
+        thumb.find('.value').text(thumb.siblings(range_type).val());
       }
     });
 
